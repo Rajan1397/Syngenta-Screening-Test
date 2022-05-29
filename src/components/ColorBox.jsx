@@ -18,15 +18,15 @@ export default function ColorBox() {
   }
 
   function handleAdd(key) {
-    setInputValue("");
     let a = +key.trim();
     a > 5
       ? alert("please enter below 5")
       : a < 1 && alert("please enter greater than 0");
-    let store = colors.filter((item) => item.id === a);
-    setValues(values.concat(store));
-    let updatedData = colors.filter((item) => item.id !== a);
-    setColors(updatedData);
+
+    setValues([...values, colors[a - 1]]);
+    colors.splice(a - 1, 1);
+    // console.log(updatedData)
+    setColors(colors);
   }
 
   function handleAddBack(key, item) {
@@ -42,12 +42,18 @@ export default function ColorBox() {
       <h1>Ballon</h1>
 
       <input
+        style={{ fontSize: "30px" }}
         type="number"
-        placeholder="please enter an number "
+        placeholder="enter ball no to shoot.. "
         value={inputValue}
         onChange={(e) => handleChange(e)}
       />
-      <button onClick={() => handleAdd(inputValue)}>shoot</button>
+      <button
+        onClick={() => handleAdd(inputValue)}
+        style={{ fontSize: "30px" }}
+      >
+        shoot
+      </button>
       <br />
       <br />
 
